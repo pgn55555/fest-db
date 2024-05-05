@@ -1,4 +1,7 @@
+/* 1. Добавление нового участника. */
+
 CREATE OR REPLACE PROCEDURE fest.new_participant(
+    -- Ввод: информация о новом участнике
     p_surname VARCHAR(20),
     p_first_name VARCHAR(20),
     p_patronymic VARCHAR(20),
@@ -21,6 +24,7 @@ BEGIN
                     ORDER BY RANDOM() LIMIT 1', p_city)
     INTO train_id;
 
+    -- Генерация информации о кураторе, поезде и проживании
     EXECUTE 'SELECT id
     FROM fest.accommodation 
     ORDER BY RANDOM() LIMIT 1'
@@ -58,6 +62,7 @@ BEGIN
 END;
 $$;
 
+-- Тестирование процедуры
 CALL fest.new_participant(
     'Ivanov',
     'Ivan',

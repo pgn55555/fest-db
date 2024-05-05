@@ -2,12 +2,17 @@ import psycopg2
 
 from random import randint
 
-conn = psycopg2.connect(dbname='...', user='...', password='...', host='...', port=...)
+dbname = "..."
+user = "..."
+password = "..."
+host = "..."
+port = ...
+conn = psycopg2.connect(dbname=dbname, user=user, password=password, host=host, port=port)
 cursor = conn.cursor()
 
 
 # organizations
-length = 15
+length = 30
 fields = ['IT', 'Business', 'Media', 'Science', 'Manufacturing']
 
 query = "INSERT INTO fest.organizations (org, field) VALUES \n"
@@ -22,7 +27,7 @@ cursor.execute(query)
 conn.commit()
 
 # transfer
-length = 30
+length = 60
 route_train = ['Moscow', 'Saint-Petersburg', 'Samara', 'Sochi', 'Vladivostok']
 
 query = "INSERT INTO fest.transfer (train, route_train, capacity) VALUES \n"
@@ -69,7 +74,7 @@ cursor.execute(query)
 conn.commit()
 
 # participants
-length = 30
+length = 100
 surnames_m = ['Smirnov', 'Ivanov', 'Kuznetsov', 'Sokolov', 'Popov', 'Lebedev', 'Kozlov', 'Novikov', 'Morozov', 'Petrov', 'Wolves', 'Solovyov', 'Vasiliev', 'Zaitsev', 'Pavlov']
 surnames_f = ['Smirnova', 'Ivanova', 'Kuznetsova', 'Sokolova', 'Popova', 'Lebedeva', 'Kozlova', 'Novikova', 'Morozova', 'Petrova', 'Wolves', 'Solovyova', 'Vasilieva', 'Zaitseva', 'Pavlova']
 names_m = ['Alexander', 'Maxim', 'Artyom']

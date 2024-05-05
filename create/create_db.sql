@@ -1,3 +1,4 @@
+-- Создание схемы
 CREATE SCHEMA IF NOT EXISTS fest;
 
 
@@ -9,6 +10,7 @@ DROP VIEW IF EXISTS fest.participants_v;
 DROP VIEW IF EXISTS fest.transfer_v;
 
 
+-- Создание таблицы с организациями и индекса для неё
 DROP TABLE IF EXISTS fest.participants;
 DROP TABLE IF EXISTS fest.organizations;
 CREATE TABLE fest.organizations(
@@ -23,6 +25,7 @@ CREATE INDEX ix_organizations_field
 ON fest.organizations (field);
 
 
+-- Создание таблицы с трансфером и индексов для неё
 DROP TABLE IF EXISTS fest.transfer;
 CREATE TABLE fest.transfer(
     train INTEGER,
@@ -41,6 +44,7 @@ CREATE INDEX ix_transfer_capacity
 ON fest.transfer (capacity);
 
 
+-- Создание таблицы с кураторами и индексов для неё
 DROP TABLE IF EXISTS fest.supervisors;
 CREATE TABLE fest.supervisors(
     id SERIAL,
@@ -59,6 +63,7 @@ CREATE INDEX ix_supervisors_region
 ON fest.supervisors (region);
 
 
+-- Создание таблицы с размещениями и индексов для неё
 DROP TABLE IF EXISTS fest.accommodation;
 CREATE TABLE fest.accommodation(
     id SERIAL,
@@ -82,6 +87,7 @@ CREATE INDEX ix_accommodation_type
 ON fest.accommodation (type_acc);
 
 
+-- Создание таблицы с участниками и индексов для неё
 CREATE TABLE fest.participants(
     surname VARCHAR(20) NOT NULL,
     first_name VARCHAR(20) NOT NULL,
@@ -96,6 +102,7 @@ CREATE TABLE fest.participants(
 
     CONSTRAINT participants_pk PRIMARY KEY (passport),
 
+    -- Наложение органичений на внешние ключи
     CONSTRAINT fk_participants_organizations FOREIGN KEY (org_id)
         REFERENCES fest.organizations(org) ON DELETE SET NULL,
     CONSTRAINT fk_participants_transfer FOREIGN KEY (train_id)

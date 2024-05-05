@@ -1,5 +1,9 @@
+/* 3. Проверка, поместятся ли пассажиры в поезд. */
+
 CREATE OR REPLACE FUNCTION fest.check_capacity(
+    -- Ввод: номер поезда
     in p_train_id INTEGER,
+    -- Вывод: информация о поезде и ответ на запрос
     out train INTEGER,
     out route_train VARCHAR(100),
     out count BIGINT,
@@ -11,6 +15,7 @@ AS $$
 BEGIN
     SELECT query.*,
         CASE
+            -- Проверка на вместимость
             WHEN query.count <= query.capacity
                 THEN TRUE
             ELSE FALSE
@@ -28,6 +33,7 @@ BEGIN
 END;
 $$;
 
+-- Тестирование функции
 SELECT *
 FROM fest.update_capacity(105, 1);
 
